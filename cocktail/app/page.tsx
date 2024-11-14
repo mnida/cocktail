@@ -12,14 +12,14 @@ export default function Home() {
 
   const cocktails = [
     {
-      name: "The Infra Specialist: Matcha Margarita",
+      name: "The Backend Engineer",
       description: "A refreshing cocktail made with matcha green tea, tequila, lime juice, and agave syrup",
-      price: "$14"
+      price: "Matcha Margarita"
     },
     {
-      name: "The Engineering Manager: Matcha Martini",
+      name: "The Frontend Engineer",
       description: "A sophisticated cocktail made with premium tequila, fresh lime juice, and triple sec, served with a salted rim.",
-      price: "$13"
+      price: "Matcha Martini"
     }
   ];
 
@@ -39,7 +39,8 @@ export default function Home() {
         {cocktails.map((cocktail) => (
           <Card key={cocktail.name}>
             <CardContent className="p-4">
-              <h2 className="text-xl font-semibold mb-2">{cocktail.name} - {cocktail.price}</h2>
+              <h2 className="text-xl font-semibold mb-2">{cocktail.name}</h2>
+              <h2 className="text-sm text-gray-500 font-semibold mb-2">{cocktail.price}</h2>
               <p className="text-gray-600">{cocktail.description}</p>
             </CardContent>
           </Card>
