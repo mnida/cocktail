@@ -5,8 +5,8 @@ export async function createOrder(name: string, drink: string) {
   try {
     await sql`INSERT INTO orders (name, drink, created_at, claimed, completed) VALUES (${name}, ${drink}, NOW(), false, false)`;
     return { success: true };
-  } catch (error: any) {
-    return { error: error.message };
+  } catch {
+    return { error: true };
   }
 }
 
@@ -21,8 +21,8 @@ export async function getOrders() {
         created_at DESC
     `
     return { success: true, data: rows }
-  } catch (error: any) {
-    return { error: error.message }
+  } catch {
+    return { error: true };
   }
 }
 
@@ -35,8 +35,8 @@ export async function getPickupOrders() {
       ORDER BY created_at ASC
     `
     return { success: true, data: rows }
-  } catch (error: any) {
-    return { error: error.message }
+  } catch {
+    return { error: true };
   }
 }
 
@@ -49,8 +49,7 @@ export async function updateOrderStatus(orderId: number, field: "claimed" | "com
       await sql`UPDATE orders SET completed = ${value} WHERE id = ${orderId}`
     }
     return { success: true }
-  } catch (error: any) {
-    console.error("Server: Error updating status:", error)
-    return { error: error.message }
+  } catch {
+    return { error: true };
   }
 }
