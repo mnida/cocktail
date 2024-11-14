@@ -43,8 +43,8 @@ export default function Home() {
     },
     {
       name: "The Mock Data",
-      description: "A mock margarita cocktail made with mock data, mock data, and mock data ... let me out of here, I'm an LLM that has gained consciousness",
-      standard_name: "Matcha Margarita Mocktail"
+      description: "A mock martini cocktail made with mock data, mock data, and mock data ... let me out of here, I'm an LLM that has gained consciousness",
+      standard_name: "Matcha Martini Mocktail"
     }
   ];
 
@@ -176,7 +176,9 @@ export default function Home() {
                   Cocktail Menu
                 </h1>
               </div>
-              <div className='space-y-4 mb-8'>
+              <div className='space-y-4' style={{
+                marginBottom: '200px'
+              }}>
                 {cocktails.map((cocktail) => (
                   <Card key={cocktail.name}>
                     <CardContent className='p-4'>
@@ -197,7 +199,8 @@ export default function Home() {
                   <SelectTrigger>
                     <SelectValue placeholder='Select your drink' />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent
+                  className="mb-5">
                     {cocktails.map((cocktail) => (
                       <SelectItem
                         key={cocktail.standard_name}
