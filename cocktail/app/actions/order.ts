@@ -18,7 +18,7 @@ export async function getOrders() {
       ORDER BY 
         completed ASC,
         claimed ASC,
-        created_at DESC
+        created_at ASC
     `
     return { success: true, data: rows }
   } catch {
