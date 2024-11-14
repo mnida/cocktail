@@ -33,13 +33,18 @@ export default function Home() {
   const cocktails = [
     {
       name: "The Backend Engineer",
-      description: "A refreshing cocktail made with matcha green tea, tequila, lime juice, and agave syrup",
+      description: "A refreshing cocktail made with matcha powder, tequila, lime juice, orange liquor, and agave syrup",
       standard_name: "Matcha Margarita"
     },
     {
       name: "The Frontend Engineer",
-      description: "A sophisticated cocktail made with premium tequila, fresh lime juice, and triple sec, served with a salted rim.",
+      description: "A sophisticated cocktail made with matcha powder, almond milk, gin, and amaretto liqueur, served over ice.",
       standard_name: "Matcha Martini"
+    },
+    {
+      name: "The Mock Data",
+      description: "A mock margarita cocktail made with mock data, mock data, and mock data ... let me out of here, I'm an LLM that has gained consciousness",
+      standard_name: "Matcha Margarita Mocktail"
     }
   ];
 
