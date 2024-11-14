@@ -1,6 +1,6 @@
 "use client"
 
-import { createOrder } from './actions/order';
+import { createOrder } from "./actions/order"
 import React, { useEffect, useState } from "react"
 import Confetti from "react-confetti"
 import { Card, CardContent } from "@/components/ui/card"
@@ -33,15 +33,17 @@ export default function Home() {
   const cocktails = [
     {
       name: "The Backend Engineer",
-      description: "A refreshing cocktail made with matcha green tea, tequila, lime juice, and agave syrup",
-      standard_name: "Matcha Margarita"
+      description:
+        "A refreshing cocktail made with matcha green tea, tequila, lime juice, and agave syrup",
+      standard_name: "Matcha Margarita",
     },
     {
       name: "The Frontend Engineer",
-      description: "A sophisticated cocktail made with premium tequila, fresh lime juice, and triple sec, served with a salted rim.",
-      standard_name: "Matcha Martini"
-    }
-  ];
+      description:
+        "A sophisticated cocktail made with premium tequila, fresh lime juice, and triple sec, served with a salted rim.",
+      standard_name: "Matcha Martini",
+    },
+  ]
 
   const handleOrder = async () => {
     if (!name || !selectedDrink) {
@@ -50,9 +52,9 @@ export default function Home() {
     }
     try {
       await createOrder(name, selectedDrink)
-      setName('')
-      setSelectedDrink('')
+
       setOrderSubmitted(true)
+      setNewOne(false)
     } catch (error) {
       console.error("Error submitting request:", error)
     }
@@ -64,6 +66,13 @@ export default function Home() {
         <>
           <Confetti />
           <div
+            onClick={() => {
+              console.log("test")
+              setNewOne(true)
+              setName("")
+              setSelectedDrink("")
+              setOrderSubmitted(false)
+            }}
             style={{
               position: "absolute",
               top: "50%",
@@ -87,8 +96,12 @@ export default function Home() {
                 left: " 50%",
               }}
             >
-              {`Thank you ${name}! Your ${selectedDrink} will be ready shortly.`}
-              <Button style={{ marginTop: "10px" }}>Order another one!</Button>
+              {`Thank you ${
+                name.slice(0, 1).toUpperCase() + name.slice(1)
+              }! Your ${selectedDrink} will be ready shortly.`}
+              <Button style={{ marginTop: "10px", zIndex: 100000 }}>
+                Order another one!
+              </Button>
             </div>
           </div>
         </>
@@ -183,7 +196,10 @@ export default function Home() {
                   </SelectTrigger>
                   <SelectContent>
                     {cocktails.map((cocktail) => (
-                      <SelectItem key={cocktail.standard_name} value={cocktail.standard_name}>
+                      <SelectItem
+                        key={cocktail.standard_name}
+                        value={cocktail.standard_name}
+                      >
                         {cocktail.name}
                       </SelectItem>
                     ))}
