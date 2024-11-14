@@ -56,7 +56,7 @@ export default function PickupPage() {
           <div
             key={order.id}
             className={`p-6 rounded-lg shadow-md text-2xl font-semibold transition-all duration-500 transform ${
-              newOrderIds.has(order.id) ? "bg-green-100" : "bg-white"
+              newOrderIds.has(order.id) ? "bg-green-100" : "bg-gray-100"
             }`}
             style={{
               animation: newOrderIds.has(order.id) ? "slideDown 0.5s ease-out" : "none"
