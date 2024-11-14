@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import { createOrder } from './actions/order';
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -14,21 +15,29 @@ export default function Home() {
     {
       name: "The Backend Engineer",
       description: "A refreshing cocktail made with matcha green tea, tequila, lime juice, and agave syrup",
-      price: "Matcha Margarita"
+      standard_name: "Matcha Margarita"
     },
     {
       name: "The Frontend Engineer",
       description: "A sophisticated cocktail made with premium tequila, fresh lime juice, and triple sec, served with a salted rim.",
-      price: "Matcha Martini"
+      standard_name: "Matcha Martini"
     }
   ];
 
-  const handleOrder = () => {
+  const handleOrder = async () => {
     if (!name || !selectedDrink) {
       alert('Please fill in all fields');
       return;
     }
-    alert(`Thank you ${name}! Your ${selectedDrink} will be ready shortly.`);
+    
+    const result = await createOrder(name, selectedDrink);
+    if (result.success) {
+      alert(`Thank you ${name}! Your ${selectedDrink} will be ready shortly.`);
+      setName('');
+      setSelectedDrink('');
+    } else {
+      alert('Failed to place order');
+    }
   };
 
   return (
@@ -40,7 +49,7 @@ export default function Home() {
           <Card key={cocktail.name}>
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">{cocktail.name}</h2>
-              <h2 className="text-sm text-gray-500 font-semibold mb-2">{cocktail.price}</h2>
+              <h2 className="text-sm text-gray-500 font-semibold mb-2">{cocktail.standard_name}</h2>
               <p className="text-gray-600">{cocktail.description}</p>
             </CardContent>
           </Card>
@@ -54,7 +63,7 @@ export default function Home() {
           </SelectTrigger>
           <SelectContent>
             {cocktails.map((cocktail) => (
-              <SelectItem key={cocktail.name} value={cocktail.name}>
+              <SelectItem key={cocktail.standard_name} value={cocktail.standard_name}>
                 {cocktail.name}
               </SelectItem>
             ))}
