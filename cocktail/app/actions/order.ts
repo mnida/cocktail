@@ -13,7 +13,7 @@ export async function createOrder(name: string, drink: string) {
 export async function getOrders() {
   try {
     const { rows } = await sql`
-      SELECT id, name, created_at, claimed, completed
+      SELECT id, name, drink, created_at, claimed, completed
       FROM orders
       ORDER BY 
         completed ASC,

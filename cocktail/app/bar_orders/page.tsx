@@ -7,6 +7,7 @@ import { QueryResultRow } from "@vercel/postgres"
 interface Order {
   id: number
   name: string
+  drink: string
   created_at: string
   claimed: boolean
   completed: boolean
@@ -24,6 +25,7 @@ export default function OrdersPage() {
           setOrders(result.data.map((row: QueryResultRow): Order => ({
             id: row.id,
             name: row.name,
+            drink: row.drink,
             created_at: row.created_at,
             claimed: row.claimed,
             completed: row.completed
@@ -58,6 +60,7 @@ export default function OrdersPage() {
             <tr className="bg-gray-100">
               <th className="px-6 py-3 border-b text-left">Order ID</th>
               <th className="px-6 py-3 border-b text-left">Name</th>
+              <th className="px-6 py-3 border-b text-left">Drink</th>
               <th className="px-6 py-3 border-b text-left">Created At</th>
               <th className="px-6 py-3 border-b text-left">Claimed</th>
               <th className="px-6 py-3 border-b text-left">Completed</th>
@@ -68,6 +71,7 @@ export default function OrdersPage() {
               <tr key={order.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 border-b">{order.id}</td>
                 <td className="px-6 py-4 border-b">{order.name}</td>
+                <td className="px-6 py-4 border-b">{order.drink}</td>
                 <td className="px-6 py-4 border-b">
                   {new Date(order.created_at).toLocaleDateString()}
                 </td>
