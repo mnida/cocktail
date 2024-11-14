@@ -1,11 +1,10 @@
 "use client"
 
-import { createOrder } from './actions/order';
+import { createOrder } from "./actions/order"
 import React, { useEffect, useState } from "react"
 import Confetti from "react-confetti"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-
 import { Button } from "@/components/ui/button"
 import {
   Select,
@@ -21,6 +20,7 @@ export default function Home() {
   const [showLogo, setShowLogo] = useState(true)
   const [orderSubmitted, setOrderSubmitted] = useState(false)
   const [error, setError] = useState("")
+  const [newOne, setNewOne] = useState(true)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,9 +55,9 @@ export default function Home() {
     }
     try {
       await createOrder(name, selectedDrink)
-      setName('')
-      setSelectedDrink('')
+
       setOrderSubmitted(true)
+      setNewOne(false)
     } catch (error) {
       console.error("Error submitting request:", error)
     }
@@ -65,24 +65,51 @@ export default function Home() {
 
   return (
     <div style={{ height: "100vh", width: "100%", position: "relative" }}>
-      {orderSubmitted && (
+      {orderSubmitted && !newOne && (
         <>
           <Confetti />
           <div
+            onClick={() => {
+              console.log("test")
+              setNewOne(true)
+              setName("")
+              setSelectedDrink("")
+              setOrderSubmitted(false)
+            }}
             style={{
               position: "absolute",
               top: "50%",
               left: " 50%",
               transform: "translate(-50%, -50%)",
+              backdropFilter: "blur(10px)",
+              zIndex: 10000,
             }}
           >
+            <img
+              src='Group 1197133278.png'
+              alt='bg'
+              style={{ position: "relative", zIndex: 2 }}
+            />
             <div
-              style={{ textAlign: "center" }}
-            >{`Thank you ${name}! Your ${selectedDrink} will be ready shortly.`}</div>
+              style={{
+                textAlign: "center",
+                position: "absolute",
+                transform: "translate(-50%, -50%)",
+                top: "50%",
+                left: " 50%",
+              }}
+            >
+              {`Thank you ${
+                name.slice(0, 1).toUpperCase() + name.slice(1)
+              }! Your ${selectedDrink} will be ready shortly.`}
+              <Button style={{ marginTop: "10px", zIndex: 100000 }}>
+                Order another one!
+              </Button>
+            </div>
           </div>
         </>
       )}
-      {!orderSubmitted && (
+      {!orderSubmitted && newOne && (
         <>
           {showLogo && (
             <div
@@ -172,7 +199,10 @@ export default function Home() {
                   </SelectTrigger>
                   <SelectContent>
                     {cocktails.map((cocktail) => (
-                      <SelectItem key={cocktail.standard_name} value={cocktail.standard_name}>
+                      <SelectItem
+                        key={cocktail.standard_name}
+                        value={cocktail.standard_name}
+                      >
                         {cocktail.name}
                       </SelectItem>
                     ))}
