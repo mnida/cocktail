@@ -49,9 +49,9 @@ export default function Home() {
       return
     }
     try {
-     const response = await createOrder(name, selectedDrink)
-     setName('')
-     setSelectedDrink('')
+      await createOrder(name, selectedDrink)
+      setName('')
+      setSelectedDrink('')
       setOrderSubmitted(true)
     } catch (error) {
       console.error("Error submitting request:", error)
@@ -152,7 +152,7 @@ export default function Home() {
                         {cocktail.name}
                       </h2>
                       <h2 className='text-sm text-gray-500 font-semibold mb-2'>
-                        {cocktail.price}
+                        {cocktail.standard_name}
                       </h2>
                       <p className='text-gray-600'>{cocktail.description}</p>
                     </CardContent>
@@ -167,7 +167,7 @@ export default function Home() {
                   </SelectTrigger>
                   <SelectContent>
                     {cocktails.map((cocktail) => (
-                      <SelectItem key={cocktail.name} value={cocktail.name}>
+                      <SelectItem key={cocktail.standard_name} value={cocktail.standard_name}>
                         {cocktail.name}
                       </SelectItem>
                     ))}
