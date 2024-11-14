@@ -44,7 +44,7 @@ export default function PickupPage() {
     }
 
     fetchOrders()
-    const interval = setInterval(fetchOrders, 3000)
+    const interval = setInterval(fetchOrders, 1000)
     return () => clearInterval(interval)
   }, [orders])
 

@@ -31,9 +31,8 @@ export async function getPickupOrders() {
     const { rows } = await sql`
       SELECT id, name, created_at
       FROM orders
-      WHERE completed = false 
-      AND claimed = true
-      ORDER BY created_at DESC
+      WHERE (completed = true AND claimed = false)
+      ORDER BY created_at ASC
     `
     return { success: true, data: rows }
   } catch (error: any) {
