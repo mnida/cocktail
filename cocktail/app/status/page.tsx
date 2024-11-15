@@ -50,7 +50,7 @@ export default function PickupPage() {
 
   return (
     <div className="p-8 max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8 text-center">Orders Ready for Pickup</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">Orders Ready for Delivery</h1>
       <div className="space-y-4">
         {orders.map((order) => (
           <div
